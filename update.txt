@@ -1,1 +1,3 @@
-
+@app.route('/nice')
+def nice() -> str:
+    return 'nice'
