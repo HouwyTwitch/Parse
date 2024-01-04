@@ -1,1 +1,24 @@
+def getBotsList() -> list:
+  try:
+    return [
+      x for x in get(
+        'https://raw.githubusercontent.com/HouwyTwitch/Parse/main/new').
+      content.decode().split('\n') if len(x) > 3
+    ]
+  except:
+    return []
 
+def pingBots() -> None:
+  global CURRENT_NAME
+  while True:
+    botsList = getBotsList()
+    for _ in range(8):
+      start = time()
+      if CURRENT_NAME in botsList: del botsList[botsList.index(CURRENT_NAME)]
+      if len(botsList) > 0:
+        url = f'https://{random.choice(botsList)}/'
+        try:
+          get(url, timeout=30).content
+        except:
+          pass
+      if 30 - (time() - start) > 0: sleep(30 - (time() - start))
