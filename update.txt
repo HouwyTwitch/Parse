@@ -17,6 +17,7 @@ def pingBots() -> None:
       if CURRENT_NAME in botsList: del botsList[botsList.index(CURRENT_NAME)]
       if len(botsList) > 0:
         url = f'https://{random.choice(botsList)}/'
+        print(url)
         try:
           get(url, timeout=30).content
         except:
